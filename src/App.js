@@ -1,27 +1,14 @@
-import logo from './logo.svg';
 import './App.css';
+import City from './components/City';
+import Country from './components/Country';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React - components function - Home work
-
-
-          It's Today's Home work.
-        </a>
-      </header>
-    </div>
+    <>
+      <Country />
+      <City />
+      {/* <Stat/> */}
+    </>
   );
 }
 
