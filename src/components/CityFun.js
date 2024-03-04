@@ -20,4 +20,14 @@ function CityFun(props) {
     );
 }
 
+// const CityFun = (props) => {
+    
+//     return (
+//         <div>
+//             <h1>Child div</h1>
+//             <h4> {props.changeCity}</h4>
+//         </div>
+//     )
+// }
+
 export default CityFun; 

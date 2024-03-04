@@ -20,14 +20,14 @@ function Counter(props) {
 
     return (
 
-        <>
+        <div>
             <h1>Counter</h1>
             <button onClick={handleClickPlus} disabled={counter < 5 ? false : true}> +</button>
-            {counter}
+            <p>{counter}</p>
             <button onClick={handleClickMinus} disabled={counter > 0 ? false : true}>-</button>
 
             <button onClick={handleReset}>Reset</button>
-        </>
+        </div >
     );
 };
 
