@@ -1,14 +1,14 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url(counter_background.avif);
+  /* background-image: url(counter_background.avif); */
   background-position: top center;
   /* background-repeat: no-repeat; */
   object-fit: cover;
   /* background-color: chocolate; */
-  text-align: center;
-  color: white;
-  padding-top: 80px;
+  /* text-align: center; */
+  /* color: white; */
+  /* padding-top: 80px; */
 }
 
 p {

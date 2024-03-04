@@ -19,24 +19,11 @@ function CountryFun(props) {
             <h2>Time zone is : {timeZone} </h2>
 
             <button onClick={changeCountry}>Change country</button>
+
+            <CityFun changeCity={name} />
         </div>
     );
 }
 
-// const CountryFun = () => {
-
-//     const changeCity = [
-
-//         setName('Surat'),
-//         population('85 Lakhs')
-//     ]
-
-//     return (
-//         <div>
-//             <h1>Parent div</h1>
-//             <CityFun changeCity={changeCity} />
-//         </div>
-//     )
-// }
 
 export default CountryFun;

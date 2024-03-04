@@ -1,28 +1,24 @@
 import React, { Component } from 'react';
+import City from './City';
 
 class Country extends Component {
 
     constructor(props) {
         super(props);
-        
+
         this.state = {
-            name:'Surat',
-            population:'89.30 Lakhs'
+            name: 'India',
+            population: 'GMT+5:30 '
         }
     }
 
     changeCity = () => {
-        this.setState ({
-            name:'Ahemdabad',
-            population:'8.85 Lakhs'
+        this.setState({
+            name: 'USA',
+            population: 'GMT-5:00'
         })
-
-        // this.setState ({
-        //     name:'Vadodra',
-        //     population:'21.8 Lakhs'
-        // })
     }
-    
+
     render() {
         return (
 
@@ -32,6 +28,8 @@ class Country extends Component {
                 <h1>Time Zone is : {this.state.population}</h1>
 
                 <button onClick={this.changeCity}>Change city</button>
+
+                <City CountryName = {this.state.name} />
             </>
         );
     }
