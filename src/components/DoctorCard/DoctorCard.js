@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../components/Card/Card.css'
+import style from '../../containers/Doctor/Doctor_card.module.css'
 
 class DoctorCard extends Component {
 
@@ -10,7 +10,7 @@ class DoctorCard extends Component {
     // }
     render() {
         return (
-            <div id='disp'>
+            <div className={style.disp}>
                 <h1>{this.props.data.name}</h1>
                 <h1>{this.props.data.age}</h1>
                 <h1>{this.props.data.degree}</h1>

@@ -28,7 +28,7 @@ const doctor = [
         "name": "Dr. Kaushal B Patel",
         "age": 32,
         "apointment fees": '₹1500',
-        "degree": 'MBBS, DM - Medical Oncology'
+        "degree": 'MBBS'
     },
     {
         "id": 5,
@@ -64,7 +64,7 @@ const doctor = [
         "name": "Dr. Kaushal B Patel",
         "age": 32,
         "apointment fees": '₹1500',
-        "degree": 'MBBS, DM - Medical Oncology'
+        "degree": 'MBBS'
     },
     {
         "id": 10,
@@ -78,18 +78,21 @@ const doctor = [
 class Doctor extends Component {
     render() {
         return (
-            <div>
+            <div className='container'>
+                <h1>Doctor :-</h1>
+                <div className='row container'>
 
-                {
-                    doctor.map((v, i) => (
-                        <>
-                            {/* <h1>{v.name}</h1> */}
-                            <DoctorCard data={v} />
-                        </>
-                    ))
-                }
+                    {
+                        doctor.map((v, i) => (
+                            <>
+
+                                <DoctorCard data={v} />
+                            </>
+                        ))
+                    }
 
 
+                </div>
             </div>
         );
     }

@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.disp {
+    background-image: url(../../containers/Medicines/Medicines_img.jpg);
+    background-position: top center;
+    object-fit: cover;
+    width: 190px;
+    height: 175px;
+    display: block;
+    padding-left: 31px;
+    margin-top: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+.disp:hover {
+    box-shadow: 0 0 20px 0 rgba(72, 133, 152, 0.5);
+   /* color: rgb(72, 133, 152) ;  */
+    transition: 0.5s all;
+}

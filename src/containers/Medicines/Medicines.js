@@ -1,6 +1,5 @@
 import React from 'react';
 import Card from '../../components/Card/Card';
-import '../../components/Card/Card.css'
 
 const data = [
     {
@@ -63,7 +62,7 @@ const data = [
 
 function Medicines(props) {
     return (
-        <div>
+        <div className='row container'>
             {
                 data.map((v, i) => (
                     <>
