@@ -5,6 +5,7 @@ import Counter from './components/Counter';
 import Country from './components/Country';
 import CountryFun from './components/CountryFun';
 import Doctor from './containers/Doctor/Doctor';
+import Header from './containers/Lifestyle/Header';
 import Medicines from './containers/Medicines/Medicines';
 
 function App() {
@@ -18,9 +19,12 @@ function App() {
 
       {/* <Counter/> */}
 
-      <Medicines />
+      {/* <Medicines /> */}
 
-      <Doctor />
+      {/* <Doctor /> */}
+
+      <Header  favcol="yellow" />
+
     </>
   );
 }
