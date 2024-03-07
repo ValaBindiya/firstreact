@@ -7,6 +7,7 @@ import CountryFun from './components/CountryFun';
 import Doctor from './containers/Doctor/Doctor';
 import Header from './containers/Lifestyle/Header';
 import Medicines from './containers/Medicines/Medicines';
+import TimeFun from './containers/Timer/TimeFun';
 import Timer from './containers/Timer/Timer';
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
 
       {/* <Header  favcol="yellow" /> */}
 
-      <Timer />
+      {/* <Timer /> */}
+
+      <TimeFun />
 
     </>
   );
