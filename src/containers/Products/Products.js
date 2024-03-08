@@ -4,7 +4,8 @@ import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, FormGroup, I
 function Products(props) {
 
     const [productData, setProductData] = useState([]);
-    const [search, setSearch] = useState([])
+    const [search, setSearch] = useState('');
+    const [sort, setSort] = useState('')
 
     const getdata = async () => {
 
@@ -12,50 +13,69 @@ function Products(props) {
         const data = await response.json();
 
         setProductData(data);
-        setSearch(data);
+
     }
 
     useEffect(() => {
         getdata()
     }, [])
 
-    const handleChange = (value) => {
+    const handleChange = () => {
 
-        // console.log(value);
-        
-        const searchValue = search.filter(v => v.category.toLowerCase().includes(value))
-        setSearch(searchValue);
-        console.log(searchValue);
+        let fData = []
+        fData = productData.filter((v) =>
+            v.category.toLowerCase().includes(search.toLowerCase()) ||
+            v.price.toString().includes(search) ||
+            v.description.toLowerCase().includes(search.toLowerCase()))
 
-        // document.getElementsByClassName("row").innerHTML =       
+
+        fData.sort((a, b) => {
+            if (sort === 'lh') {
+                return a.price - b.price
+            } else if (sort === 'hl') {
+                return b.price - a.price
+            } else if (sort === 'az') {
+                return a.title.localeCompare(b.title)
+            } else if (sort === 'za') {
+                return b.title.localeCompare(a.title)
+            }
+        })
+
+        return fData
 
     }
+
+    const finalData = handleChange()
 
     return (
         <div className='container'>
 
-            <FormGroup>
-                <Label for="exampleSearch">
-                    Search
-                </Label>
-                <Input style={
-                    { width: "250px" }
-                }
-                    id="exampleSearch" name="search" placeholder="search" type="search" onChange={e => handleChange(e.target.value)}
-                />
-            </FormGroup>
+            <h1>Products</h1>
 
             <div className='row'>
-                <h1>Products</h1>
 
+                <Input style={{ width: "250px" }}
+                    id="exampleSearch" name="search" placeholder="search" type="search" onChange={event => setSearch(event.target.value)}
+                />
+
+                <select onChange={event => setSort(event.target.value)} className='p-1 ml-1' style={{ width: "20%" }}>
+                    <option value=""> ---Select Sort---</option>
+                    <option value="lh">Price: Low - Heigh</option>
+                    <option value="hl">Price: Heigh - Low </option>
+                    <option value="az">Title : A to Z</option>
+                    <option value="za">Title : Z to A</option>
+                </select>
+            </div>
+
+            <div className='row'>
                 {
-                    productData.map((v, i) => (
+                    finalData.map((v, i) => (
                         <div className='col-md-4 gy-5'>
                             <Card >
-                                <img src={v.image} height={"240px"} width={"260px"} />
+                                <img src={v.image} height={"240px"} width={"230px"} className='mx-auto mt-3' />
                                 <CardBody>
                                     <CardTitle tag="h5">
-                                    {v.title.length > 20 ? v.title.substring(0, 20) + "..." : v.title}
+                                        {v.title.length > 20 ? v.title.substring(0, 20) + "..." : v.title}
                                     </CardTitle>
                                     <CardSubtitle
                                         className="mb-2 text-muted"
@@ -64,7 +84,7 @@ function Products(props) {
                                         {v.price}
                                     </CardSubtitle>
                                     <CardText>
-                                        {v.description.substring(0, 40) + "..."}
+                                        {v.description.length > 40 ? v.description.substring(0, 40) + "..." : v.description}
                                     </CardText>
                                     <Button>
                                         Add to cart
