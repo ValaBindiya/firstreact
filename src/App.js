@@ -7,8 +7,10 @@ import CountryFun from './components/CountryFun';
 import Doctor from './containers/Doctor/Doctor';
 import Header from './containers/Lifestyle/Header';
 import Medicines from './containers/Medicines/Medicines';
+import Products from './containers/Products/Products';
 import TimeFun from './containers/Timer/TimeFun';
 import Timer from './containers/Timer/Timer';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -29,7 +31,9 @@ function App() {
 
       {/* <Timer /> */}
 
-      <TimeFun />
+      {/* <TimeFun /> */}
+
+      <Products />
 
     </>
   );

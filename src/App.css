@@ -9,7 +9,7 @@ p {
   font-size: 20px;
   font-weight: 600;
 }
-
+/* 
 button {
   outline: none;
   padding: 5px 10px;
@@ -29,16 +29,4 @@ button:last-child {
 
 button:disabled {
   background-color: whitesmoke;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 10px 10px;
-}
-
-.container {
-  max-width: 85%;
-  margin: 0 auto;
-}
+} */
