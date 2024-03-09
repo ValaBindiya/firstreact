@@ -5,20 +5,31 @@ function Products(props) {
 
     const [productData, setProductData] = useState([]);
     const [search, setSearch] = useState('');
-    const [sort, setSort] = useState('')
+    const [sort, setSort] = useState('');
+    let [category, setCategory] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
+
+    useEffect(() => {
+        getdata()
+    }, [])
 
     const getdata = async () => {
 
         const response = await fetch("https://fakestoreapi.com/products");
         const data = await response.json();
 
+        let uniqCategory = [];
+
+        data.map((v) => {
+            if (!uniqCategory.includes(v.category)) {
+                uniqCategory.push(v.category);
+            }
+        });
+        
+        setCategory(uniqCategory);
         setProductData(data);
 
     }
-
-    useEffect(() => {
-        getdata()
-    }, [])
 
     const handleChange = () => {
 
@@ -41,6 +52,10 @@ function Products(props) {
             }
         })
 
+        if (selectedCategory) {
+            fData = fData.filter((v) => v.category === selectedCategory);
+        }
+
         return fData
 
     }
@@ -58,14 +73,35 @@ function Products(props) {
                     id="exampleSearch" name="search" placeholder="search" type="search" onChange={event => setSearch(event.target.value)}
                 />
 
-                <select onChange={event => setSort(event.target.value)} className='p-1 ml-1' style={{ width: "20%" }}>
+                <select onChange={event => setSort(event.target.value)} className='p-1 ml-1' style={{ width: "20%", marginLeft:"40px" }}>
                     <option value=""> ---Select Sort---</option>
                     <option value="lh">Price: Low - Heigh</option>
                     <option value="hl">Price: Heigh - Low </option>
                     <option value="az">Title : A to Z</option>
                     <option value="za">Title : Z to A</option>
                 </select>
+
             </div>
+
+            <div className='row justify-content-between'>
+                <button className='mt-3 py-1'
+                    style={{ background: selectedCategory === "" ? "lightGrey" : "none", width: "16%", borderRadius:"5px" }}
+                    onClick={() => setSelectedCategory("")}
+                >
+                    All Selected
+                </button>
+                {
+                    category.map((v) => (
+                        <button className='mt-3 py-1'
+                            style={{ background: v === selectedCategory ? "lightGrey" : "none", width: "16%", borderRadius:"5px" }}
+                            onClick={() => setSelectedCategory(v)}
+                        >
+                            {v}
+                        </button>
+                    ))}
+
+            </div>
+
 
             <div className='row'>
                 {
