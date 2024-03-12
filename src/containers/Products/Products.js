@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, FormGroup, Input, Label } from 'reactstrap';
+import { Button, Card, CardBody, CardSubtitle, CardText, CardTitle, FormGroup, Input, Label, Spinner } from 'reactstrap';
 
 function Products(props) {
 
     const [productData, setProductData] = useState([]);
     const [search, setSearch] = useState('');
     const [sort, setSort] = useState('');
-    let [category, setCategory] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState("");
+    const [category, setCategory] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         getdata()
-    }, [])
+    }, []);
 
     const getdata = async () => {
 
@@ -25,10 +26,11 @@ function Products(props) {
                 uniqCategory.push(v.category);
             }
         });
-        
+
         setCategory(uniqCategory);
         setProductData(data);
 
+        setLoading(false)
     }
 
     const handleChange = () => {
@@ -52,7 +54,7 @@ function Products(props) {
             }
         })
 
-        if (selectedCategory) {
+        if (selectedCategory != '') {
             fData = fData.filter((v) => v.category === selectedCategory);
         }
 
@@ -65,74 +67,86 @@ function Products(props) {
     return (
         <div className='container'>
 
-            <h1>Products</h1>
+            {
 
-            <div className='row'>
+                loading ?
+                    // <p>Loading....</p>
+                    <div className='text-center' style={{marginTop:'200px'}}><Spinner>
+                        Loading...
+                    </Spinner></div> :
+                    <>
+                        <h1>Products</h1>
 
-                <Input style={{ width: "250px" }}
-                    id="exampleSearch" name="search" placeholder="search" type="search" onChange={event => setSearch(event.target.value)}
-                />
+                        <div className='row'>
 
-                <select onChange={event => setSort(event.target.value)} className='p-1 ml-1' style={{ width: "20%", marginLeft:"40px" }}>
-                    <option value=""> ---Select Sort---</option>
-                    <option value="lh">Price: Low - Heigh</option>
-                    <option value="hl">Price: Heigh - Low </option>
-                    <option value="az">Title : A to Z</option>
-                    <option value="za">Title : Z to A</option>
-                </select>
+                            <Input style={{ width: "250px" }}
+                                id="exampleSearch" name="search" placeholder="search" type="search" onChange={event => setSearch(event.target.value)}
+                            />
 
-            </div>
+                            <select onChange={event => setSort(event.target.value)} className='p-1 ml-1' style={{ width: "20%", marginLeft: "40px" }}>
+                                <option value=""> ---Select Sort---</option>
+                                <option value="lh">Price: Low - Heigh</option>
+                                <option value="hl">Price: Heigh - Low </option>
+                                <option value="az">Title : A to Z</option>
+                                <option value="za">Title : Z to A</option>
+                            </select>
 
-            <div className='row justify-content-between'>
-                <button className='mt-3 py-1'
-                    style={{ background: selectedCategory === "" ? "lightGrey" : "none", width: "16%", borderRadius:"5px" }}
-                    onClick={() => setSelectedCategory("")}
-                >
-                    All Selected
-                </button>
-                {
-                    category.map((v) => (
-                        <button className='mt-3 py-1'
-                            style={{ background: v === selectedCategory ? "lightGrey" : "none", width: "16%", borderRadius:"5px" }}
-                            onClick={() => setSelectedCategory(v)}
-                        >
-                            {v}
-                        </button>
-                    ))}
-
-            </div>
-
-
-            <div className='row'>
-                {
-                    finalData.map((v, i) => (
-                        <div className='col-md-4 gy-5'>
-                            <Card >
-                                <img src={v.image} height={"240px"} width={"230px"} className='mx-auto mt-3' />
-                                <CardBody>
-                                    <CardTitle tag="h5">
-                                        {v.title.length > 20 ? v.title.substring(0, 20) + "..." : v.title}
-                                    </CardTitle>
-                                    <CardSubtitle
-                                        className="mb-2 text-muted"
-                                        tag="h6"
-                                    >
-                                        {v.price}
-                                    </CardSubtitle>
-                                    <CardText>
-                                        {v.description.length > 40 ? v.description.substring(0, 40) + "..." : v.description}
-                                    </CardText>
-                                    <Button>
-                                        Add to cart
-                                    </Button>
-                                </CardBody>
-                            </Card>
                         </div>
 
-                    ))
-                }
+                        <div className='row justify-content-between'>
+                            <button className='mt-3 py-1'
+                                style={{ background: selectedCategory === "" ? "lightGrey" : "none", width: "16%", borderRadius: "5px" }}
+                                onClick={() => setSelectedCategory('')}
+                            >
+                                All Selected </button>
+                            {
+                                category.map((v) => (
+                                    <button className='mt-3 py-1'
+                                        style={{ background: v === selectedCategory ? "lightGrey" : "none", width: "16%", borderRadius: "5px" }}
+                                        onClick={() => setSelectedCategory(v)}
+                                    >
+                                        {v}
+                                    </button>
+                                ))
+                            }
 
-            </div>
+                        </div>
+
+
+                        <div className='row'>
+                            {
+                                finalData.map((v, i) => (
+                                    <div className='col-md-4 gy-5'>
+                                        <Card >
+                                            <img src={v.image} height={"240px"} width={"230px"} className='mx-auto mt-3' />
+                                            <CardBody>
+                                                <CardTitle tag="h5">
+                                                    {v.title.length > 20 ? v.title.substring(0, 20) + "..." : v.title}
+                                                </CardTitle>
+                                                <CardSubtitle
+                                                    className="mb-2 text-muted"
+                                                    tag="h6"
+                                                >
+                                                    {v.price}
+                                                </CardSubtitle>
+                                                <CardText>
+                                                    {v.description.length > 40 ? v.description.substring(0, 40) + "..." : v.description}
+                                                </CardText>
+                                                <Button>
+                                                    Add to cart
+                                                </Button>
+                                            </CardBody>
+                                        </Card>
+                                    </div>
+
+                                ))
+                            }
+
+                        </div>
+
+                    </>
+
+            }
 
         </div>
     );
